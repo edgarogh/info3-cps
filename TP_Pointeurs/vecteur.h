@@ -31,14 +31,10 @@ void liberer_vecteur(vecteur v);
 /*
    est_vecteur_invalide
    description : retourne 1 si le vecteur est invalide
+   un vecteur est invalide si le pointeur vers ses données est nul
    parametres : le vecteur
    valeur de retour : 1 si le vecteur est invalide 0 sinon
    effets de bord : aucun
-*/
-/*
-   REMARQUE : la valeur a prendre comme vecteur invalide est a choisir par le
-   programmeur qui complete vecteur.c, Il faut choisir une valeur qui ne peut
-   pas etre prise par un vecteur valide.
 */
 int est_vecteur_invalide(vecteur v);
 

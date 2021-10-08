@@ -2,24 +2,29 @@
 #include <stdlib.h>
 
 vecteur allouer_vecteur(int taille) {
-    vecteur v = { 0, NULL };
-    return v;
+    return (vecteur) {
+        .taille = taille,
+        .donnees = malloc(taille * sizeof(double)),
+    };
 }
 
 void liberer_vecteur(vecteur v) {
+    free(v.donnees);
 }
 
 int est_vecteur_invalide(vecteur v) {
-    int resultat = 0;
-    return resultat;
+    return v.donnees == NULL;
 }
 
-double *acces_vecteur(vecteur v, int i) {
-    double *resultat = NULL;
-    return resultat;
+double* acces_vecteur(vecteur v, int i) {
+    if (i >= v.taille) {
+        // TODO log a message
+        exit(2);
+    }
+
+    return &v.donnees[i];
 }
 
 int taille_vecteur(vecteur v) {
-    int resultat = 0;
-    return resultat;
+    return v.taille;
 }

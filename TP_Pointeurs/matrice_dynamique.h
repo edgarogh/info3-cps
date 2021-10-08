@@ -1,7 +1,11 @@
 #ifndef __MATRICE_DYNAMIQUE__
 #define __MATRICE_DYNAMIQUE__
 
-struct donnees_matrice;
+struct donnees_matrice {
+   int l;
+   int c;
+   double** donnees;
+};
 
 typedef struct donnees_matrice *matrice;
 
