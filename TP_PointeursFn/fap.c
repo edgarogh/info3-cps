@@ -2,12 +2,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-fap creer_fap_vide()
+fap creer_fap_vide(custom_lt_t custom_lt)
 {
-  fap resultat;
-
-  resultat.tete = NULL;
-  return resultat;
+  return (fap) {
+    .tete = NULL,
+    .custom_lt = custom_lt,
+  };
 }
 
 fap inserer(fap f, int element, int priorite)
@@ -17,7 +17,7 @@ fap inserer(fap f, int element, int priorite)
   nouveau = (struct maillon *) malloc(sizeof(struct maillon));
   nouveau->element = element;
   nouveau->priorite = priorite;
-  if ((f.tete == NULL) || (priorite < f.tete->priorite))
+  if ((f.tete == NULL) || (f.custom_lt(priorite, f.tete->priorite)))
     {
       nouveau->prochain = f.tete;
       f.tete = nouveau;
@@ -26,7 +26,7 @@ fap inserer(fap f, int element, int priorite)
     {
       precedent = f.tete;
       courant = precedent->prochain;
-      while ((courant != NULL) && (priorite >= courant->priorite))
+      while ((courant != NULL) && !f.custom_lt(priorite, courant->priorite))
         {
           precedent = courant;
           courant = courant->prochain;

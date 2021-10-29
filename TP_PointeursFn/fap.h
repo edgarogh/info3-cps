@@ -1,24 +1,29 @@
 #ifndef __FAP_H__
 #define __FAP_H__
 
+#include "stdbool.h"
+
 struct maillon {
 int element;
 int priorite;
 struct maillon *prochain;
 };
 
+typedef bool (*custom_lt_t)(int a, int b);
+
 typedef struct {
   struct maillon *tete;
+  custom_lt_t custom_lt;
 } fap;
 
 /*
    creer_fap_vide
    description : construit une fap vide.
-   parametres : aucun
+   parametres : fonction (<) personalisée
    valeur de retour : une fap vide
    effets de bord : aucun
 */
-fap creer_fap_vide();
+fap creer_fap_vide(custom_lt_t custom_lt);
 
 /*
    inserer
